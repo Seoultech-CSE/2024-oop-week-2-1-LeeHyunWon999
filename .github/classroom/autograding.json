@@ -1,0 +1,34 @@
+{
+  "tests": [
+    {
+      "name": "test1",
+      "setup": "javac 2_1.java",
+      "run": "java test",
+      "input": "10\r\n",
+      "output": "10.0 miles is 16.0 kilometers",
+      "comparison": "included",
+      "timeout": 3,
+      "points": null
+    },
+    {
+      "name": "test2",
+      "setup": "javac 2_1.java",
+      "run": "java test",
+      "input": "96\r\n",
+      "output": "96.0 miles is 153.6 kilometers",
+      "comparison": "included",
+      "timeout": 3,
+      "points": null
+    },
+    {
+      "name": "test3",
+      "setup": "javac 2_1.java",
+      "run": "java test",
+      "input": "100\r\n",
+      "output": "100.0 miles is 160.0 kilometers",
+      "comparison": "included",
+      "timeout": 3,
+      "points": null
+    }
+  ]
+}
