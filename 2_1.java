@@ -5,6 +5,6 @@ class test {
     System.out.print("Enter a miles: ");
     double miles = input.nextDouble();
     double kilometers = miles * 1.6;
-    System.out.println(miles + " miles is " + kilometers + " kilometers");
+    System.out.printf("%.1f miles is %.1f kilometers", miles, kilometers);
   }
 }
