@@ -1,19 +1,57 @@
-name: GitHub Classroom Workflow
-
-on:
-  - push
-  - workflow_dispatch
-
+name: Autograding Tests
+'on':
+- push
+- workflow_dispatch
+- repository_dispatch
 permissions:
   checks: write
   actions: read
   contents: read
-
 jobs:
-  build:
-    name: Autograding
+  run-autograding-tests:
     runs-on: ubuntu-latest
     if: github.actor != 'github-classroom[bot]'
     steps:
-      - uses: actions/checkout@v4
-      - uses: education/autograding@v1
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: test1
+      id: test1
+      uses: education/autograding-io-grader@v1
+      with:
+        test-name: test1
+        setup-command: javac 2_1.java
+        command: java test
+        input: "10\r\n"
+        expected-output: 10.0 miles is 16.0 kilometers
+        comparison-method: contains
+        timeout: 3
+    - name: test2
+      id: test2
+      uses: education/autograding-io-grader@v1
+      with:
+        test-name: test2
+        setup-command: javac 2_1.java
+        command: java test
+        input: "96\r\n"
+        expected-output: 96.0 miles is 153.6 kilometers
+        comparison-method: contains
+        timeout: 3
+    - name: test5
+      id: test5
+      uses: education/autograding-io-grader@v1
+      with:
+        test-name: test5
+        setup-command: javac 2_1.java
+        command: java test
+        input: "100\r\n"
+        expected-output: 100.0 miles is 160.0 kilometers
+        comparison-method: contains
+        timeout: 3
+    - name: Autograding Reporter
+      uses: education/autograding-grading-reporter@v1
+      env:
+        TEST1_RESULTS: "${{steps.test1.outputs.result}}"
+        TEST2_RESULTS: "${{steps.test2.outputs.result}}"
+        TEST5_RESULTS: "${{steps.test5.outputs.result}}"
+      with:
+        runners: test1,test2,test5
